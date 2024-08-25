@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label, input, select, button {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .edit-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manage Students</h1>
+
+    <form method="POST" action="{{ url_for('manage_students') }}">
+        <label for="class_filter">Filter by Class:</label>
+        <select id="class_filter" name="class_filter">
+            <option value="">All</option>
+            <option value="S1">S1</option>
+            <option value="S2">S2</option>
+	    <option value="S3">S3</option>
+            <option value="S4">S4</option>
+            <option value="S5">S5</option>
+	    <option value="S6">S6</option>
+            <!-- Add more class options as needed -->
+        </select>
+
+        <label for="stream_filter">Filter by Stream:</label>
+        <select id="stream_filter" name="stream_filter">
+            <option value="">All</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+	    <option value="ARTS">ARTS</option>
+	    <option value="Science">Science</option>
+            <!-- Add more stream options as needed -->
+        </select>
+
+        <label for="name_search">Search by Name:</label>
+        <input type="text" id="name_search" name="name_search">
+        <button type="submit">Apply Filters</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th>Stream</th>
+                <th>Photo</th>
+                <th>Parents Name</th>
+                <th>Parents Contact</th>
+                <th>Parents Email</th>
+                <th>Admission Date</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in filtered_students %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.gender }}</td>
+                    <td>{{ student.class_name }}</td>
+                    <td>{{ student.stream }}</td>
+                    <td>{{ student.photo }}</td>
+                    <td>{{ student.parents_name }}</td>
+                    <td>{{ student.parents_contact }}</td>
+                    <td>{{ student.parents_email }}</td>
+                    <td>{{ student.admission_date }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>
+                        <a href="{{ url_for('update_student', student_id=student.id) }}" class="edit-button">Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

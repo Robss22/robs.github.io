@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robs Online School</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            padding: 10px 0;
+            color: #fff;
+            text-align: center;
+        }
+        header img {
+            width: 150px; /* Adjust the width to make the image smaller */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #2980b9;
+            padding: 5px 0;
+        }
+        nav a {
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            background-color: #1f6391;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 0;
+        }
+        h5 {
+            color: #2980b9;
+            text-align: center;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .section-title {
+            font-size: 1.5em;
+            color: #2980b9;
+            margin-bottom: 5px;
+        }
+        .quote {
+            font-size: 1.3em;
+            font-style: italic;
+            text-align: center;
+            margin: 40px 0;
+            color: #7f8c8d;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .cta a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #e74c3c;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        .cta a:hover {
+            background-color: #c0392b;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/robslogo.jfif' %}" alt="Robs Online School Logo">
+        <h5>"Let’s Make It Happen!"</h5>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="{% url 'student_app:contact' %}">Contact Us</a>
+        <a href="{% url 'student_app:applicationform' %}">Apply</a>
+        <a href="{% url 'student_app:login' %}">Login</a>
+    </nav>
+
+    <div class="container">
+        <p>At Robs Online School, we believe it's never too late to achieve your dreams. Whether life took you on a different path or circumstances held you back, we're here to support you every step of the way. Our mission is to provide you with the education you deserve, right from the comfort of your home.</p>
+        
+        <div class="section-title">Why Choose Robs Online School?</div>
+        <p><strong>Flexible Learning:</strong> We understand that you have responsibilities—work, family, and other commitments. That’s why we offer online classes that fit your schedule. Study at your own pace, on your own time, without compromising on quality.</p>
+        <p><strong>Comprehensive Curriculum:</strong> Our curriculum is designed to cover all UNEB secondary level subjects. Whether you need to catch up or excel, our courses are tailored to meet your unique needs.</p>
+        <p><strong>Expert Coaching:</strong> Our experienced teachers are dedicated to helping you succeed. With personalized coaching in all subjects, you’ll gain the knowledge and confidence to excel in your exams.</p>
+        <p><strong>Engaging Content:</strong> Learning with us isn’t just about passing exams; it’s about reigniting your passion for education. Our lessons are interactive, engaging, and designed to make learning enjoyable.</p>
+        
+        <div class="section-title">Join a Community of Learners</div>
+        <p>At Robs Online School, you’re not just a student; you’re part of a community. Connect with peers from different backgrounds, share your experiences, and support each other on this educational journey. Our platform fosters collaboration and interaction, making learning more than just a solitary activity.</p>
+        
+        <div class="section-title">Your Journey Starts Here</div>
+        <p>Take the first step towards a brighter future. Enroll today, and let’s make it happen together. With Robs Online School, your secondary education is within reach—no matter where you are or what your schedule looks like.</p>
+        
+        <div class="quote">"Education is the most powerful weapon which you can use to change the world." — Nelson Mandela</div>
+        
+        <div class="cta">
+            <a href="#">Explore Our Services</a> | 
+            <a href="#">Meet Our Instructors</a> | 
+            <a href="#">Contact Us</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Contact us at: info@robsonlineschool.com | +256 752 465 948</p>
+        <p>
+            Follow us:
+            <a href="#">Facebook</a> |
+            <a href="#">Twitter</a> |
+            <a href="#">Instagram</a>
+        </p>
+        <p>&copy; 2024 All Rights Reserved. Robs Technologies</p>
+
+    </footer>
+</body>
+</html>

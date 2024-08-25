@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Classes</title>
+</head>
+<body>
+    <h1>Add Classes and Streams</h1>
+    
+    <form action="/add_class" method="POST">
+        <label for="class_name">Class Name:</label>
+        <select id="class_name" name="class_name" required>
+            <option value="S1">S1</option>
+            <option value="S2">S2</option>
+            <option value="S3">S3</option>
+            <option value="S4">S4</option>
+            <option value="S5">S5</option>
+            <option value="S6">S6</option>
+        </select>
+        
+        <label for="stream">Stream:</label>
+        <select id="stream" name="stream" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="ARTS">ARTS</option>
+            <option value="SCIENCE">SCIENCE</option>
+        </select>
+        
+        <button type="submit">Add Class</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Student</title>
+    <style>
+        /* Your styling here... */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .form-group label,
+        .form-group input,
+        .form-group textarea {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            flex: 1;
+        }
+        .form-group label {
+            min-width: 120px;
+            text-align: left;
+            margin-right: 10px;
+        }
+        .photo-frame {
+            border: 1px solid #000;
+            width: 120px;
+            height: 150px;
+            text-align: center;
+            float: right;
+            margin-left: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Update Student</h1>
+
+        <div class="photo-frame">
+            <p>Photo Frame</p>
+            <!-- Add image display here if needed -->
+        </div>
+
+        <form method="POST" action="{{ url_for('update_student', student_id=student.id) }}">
+            <input type="hidden" name="student_id" value="{{ student.id }}">
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="{{ student.name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" name="gender" value="{{ student.gender }}">
+            </div>
+
+            <div class="form-group">
+                <label for="class_name">Class:</label>
+                <input type="text" id="class_name" name="class_name" value="{{ student.class_name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="stream">Stream:</label>
+                <input type="text" id="stream" name="stream" value="{{ student.stream }}">
+            </div>
+
+            <div class="form-group">
+                <label for="parents_name">Parents Name:</label>
+                <input type="text" id="parents_name" name="parents_name" value="{{ student.parents_name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="parents_contact">Parents Contact:</label>
+                <input type="text" id="parents_contact" name="parents_contact" value="{{ student.parents_contact }}">
+            </div>
+
+            <div class="form-group">
+                <label for="parents_email">Parents Email:</label>
+                <input type="text" id="parents_email" name="parents_email" value="{{ student.parents_email }}">
+            </div>
+
+            <div class="form-group">
+                <label for="admission_date">Admission Date:</label>
+                <input type="date" id="admission_date" name="admission_date" value="{{ student.admission_date }}">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address">{{ student.address }}</textarea>
+            </div>
+
+            <button type="submit">Update Student</button>
+        </form>
+    </div>
+</body>
+</html>

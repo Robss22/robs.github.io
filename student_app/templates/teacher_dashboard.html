@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ current_user.username }}!</h1>
+    
+    <h2>Dashboard</h2>
+    
+    <ul>
+        <li>
+            <form id="upload-content-form" method="post" action="{% url 'student_app:upload_content' %}">
+                {% csrf_token %}
+                <a href="#" onclick="document.getElementById('upload-content-form').submit(); return false;">Upload Content</a>
+            </form>
+        </li>
+        <li>
+            {% if students %}
+                <a href="{% url 'student_app:edit_student' student_id=students.0.id %}">Manage Students and Marks</a>
+            {% else %}
+                <a href="{% url 'student_app:add_student' %}">Manage Students and Marks</a>
+            {% endif %}
+        </li>
+        <li>
+            <a href="{% url 'student_app:upload_marks' %}">Upload/Enter Marks</a>
+        </li>
+        <!-- Add more links/buttons for other actions as needed -->
+    </ul>
+   
+    <a href="{% url 'student_app:login' %}">Logout</a>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Bulk Students</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Upload Bulk Students</h1>
+
+    {% if message %}
+        <div class="alert alert-{{ message.1 }}">
+            {{ message.0 }}
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="{{ form.file.id_for_label }}">Choose Excel File:</label>
+            <div class="input-group">
+                <div class="custom-file">
+                    {{ form.file }}
+                    <label class="custom-file-label" for="{{ form.file.id_for_label }}">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" id="selectFileBtn">Select File</button>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+
+    {% if form.errors %}
+        <div class="alert alert-danger mt-3">
+            <strong>Error!</strong> Please correct the following errors:
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    <li>{{ field }}:
+                        <ul>
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <hr>
+
+    <!-- Add a button for downloading Excel template -->
+    <a href="{% url 'student_app:download_excel_template' %}" class="btn btn-success">Download Excel Template</a>
+
+    <hr>
+
+    <a href="{% url 'student_app:add_student' %}" class="btn btn-info">Add Single Student</a>
+
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts here -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.getElementById('selectFileBtn').addEventListener('click', function () {
+        document.getElementById('{{ form.file.id_for_label }}').click();
+    });
+</script>
+
+</body>
+</html>

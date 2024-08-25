@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add User</title>
+</head>
+<body>
+<h1>Register User</h1>
+  <form action="{% url 'student_app:add_user' %}" method="post">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" required><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required><br>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required><br>
+    <label for="role">Role:</label>
+    <label for="uemail">email:</label>
+    <input type="text" name="email" id="email" required><br>
+    <select name="role" id="role" required>
+      <option value="0">Student</option>
+      <option value="1">Teacher</option>
+      <option value="2">Admin</option>
+    </select><br>
+    <input type="submit" value="Add User">
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Students</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.en.min.js"></script>
+  {{ form.media }} <!-- Include form media files -->
+
+  <style>
+    /* Your existing CSS styles */
+
+    /* Add CSS for label alignment */
+    .form-row label {
+      flex: 1;
+      margin-right: 10px;
+      text-align: right; /* Adjust alignment as needed */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Add Students</h1>
+  </header>
+
+  <a href="{% url 'student_app:upload_bulk_students' %}">Upload Bulk Students</a>
+  <div style="max-width: 600px; margin: 0 auto;">
+    <form method="POST" action="{% url 'student_app:add_student' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <button type="submit">Add Student</button>
+    </form>
+  </div>
+
+  <div id="message">
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#id_admission_date').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true,
+        orientation: 'bottom auto',
+        todayBtn: true,
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Students' Marks</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Add Students' Marks</h1>
+  </header>
+  <form id="marksForm" method="POST" action="/upload_marks">
+    <label for="class">Select a Class:</label>
+    <select id="class" name="class" required>
+      <option value="S1">S1</option>
+      <option value="S2">S2</option>
+      <option value="S3">S3</option>
+    </select>
+
+    <label for="stream">Select Stream:</label>
+    <select id="stream" name="stream" required>
+      <option value="A">A</option>
+      <option value="B">B</option>
+    </select>
+
+    <label for="term">Select a Term:</label>
+    <select id="term" name="term" required>
+      <option value="Term I">Term I</option>
+      <option value="Term II">Term II</option>
+    </select>
+
+    <label for="year">Select a Year:</label>
+    <select id="year" name="year" required>
+    </select>
+
+    <label for="subject">Select a Subject:</label>
+    <select id="subject" name="subject" required>
+      <option value="">Select a subject</option>
+      <option value="English">English</option>
+      <option value="Mathematics">Mathematics</option>
+    </select>
+
+    <label for="assessment_type">Assessment Type:</label>
+    <select id="assessment_type" name="assessment_type" required>
+      <option value="">Select an assessment type</option>
+      <option value="BOT">Beginning of Term</option>
+      <option value="EOT">End of Term</option>
+    </select>
+
+    <!-- Button to Load Names -->
+    <button type="button" id="loadNamesButton">Load Names</button>
+
+    <!-- Button to Save Marks -->
+    <button type="button" id="saveMarksButton">Save Marks</button>
+  </form>
+
+  <div id="studentsTable"></div>
+
+ <div id="studentsTable"></div>
+
+<div id="message">
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+
+
+  <script>
+    // Event listener for Load Names button click
+    document.getElementById('loadNamesButton').addEventListener('click', function() {
+      fetchStudents(); // Fetch and display student data
+    });
+
+    // Event listener for Save Marks button click
+    document.getElementById('saveMarksButton').addEventListener('click', function() {
+      saveMarks(); // Save entered marks
+    });
+
+// Function to fetch student data and populate the table
+function fetchStudents() {
+  // Assuming you have an API endpoint to fetch student data
+  fetch('/api/get_students')
+    .then(response => response.json())
+    .then(data => {
+      const studentsTable = document.getElementById('studentsTable');
+      studentsTable.innerHTML = ''; // Clear previous content
+
+      // Create a table and header row
+      const table = document.createElement('table');
+      const headerRow = document.createElement('tr');
+      headerRow.innerHTML = '<th>Student ID</th><th>Name</th><th>...</th>'; // Add more headers
+
+      // Append header row to the table
+      table.appendChild(headerRow);
+
+      // Iterate over fetched student data and create table rows
+      data.forEach(student => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${student.id}</td><td>${student.name}</td><td>...</td>`; // Add more data
+        table.appendChild(row);
+      });
+
+      // Append the table to the studentsTable div
+      studentsTable.appendChild(table);
+    })
+    .catch(error => {
+      console.error('Error fetching student data:', error);
+    });
+}
+
+// Function to save entered marks
+function saveMarks() {
+  // Gather data from form inputs
+  const class = document.getElementById('class').value;
+  const term = document.getElementById('term').value;
+  const year = document.getElementById('year').value;
+  const subject = document.getElementById('subject').value;
+  const assessmentType = document.getElementById('assessment_type').value;
+
+  // Loop through table rows and gather marks data
+  const marksData = [];
+  const table = document.querySelector('table');
+  const rows = table.querySelectorAll('tr');
+  for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header row
+    const studentId = rows[i].querySelector('td:first-child').textContent;
+    const marksInput = rows[i].querySelector('td:last-child input');
+    const marksValue = marksInput.value ? parseFloat(marksInput.value) : null;
+    
+    marksData.push({
+      studentId: studentId,
+      marks: marksValue
+    });
+  }
+
+  // Send marks data to the server
+  fetch('/api/save_marks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      class: class,
+      term: term,
+      year: year,
+      subject: subject,
+      assessmentType: assessmentType,
+      marks: marksData
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Marks saved successfully:', data);
+    // Optionally show a success message or update the UI
+  })
+  .catch(error => {
+    console.error('Error saving marks:', error);
+    // Show an error message or handle the error
+  });
+}
+    // Dynamically populate year options starting from 2023 up to current year
+    var yearSelect = document.getElementById("year");
+    var currentYear = new Date().getFullYear();
+    for (var i = 2023; i <= currentYear; i++) {
+      var option = document.createElement("option");
+      option.value = String(i); // Convert to string
+      option.text = i;
+      yearSelect.appendChild(option);
+    }
+  </script>
+</body>
+</html>
